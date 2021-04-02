@@ -41,8 +41,10 @@ function vishalyes()
 
         }   
         else{
-            console.log(obj[level][2]);
-            
+            document.getElementById("ques").style.display = "none";
+            document.getElementById("ans1").style.display = "none"; 
+            document.getElementById("ans2").style.display = "none";
+            document.getElementById("res").innerHTML = obj[level][2];
         }
     
     
@@ -56,7 +58,10 @@ function vishalNo()
             level++;
         }   
         else{
-            console.log(obj[level][3]);
+            document.getElementById("ques").style.display = "none";
+            document.getElementById("ans1").style.display = "none";
+            document.getElementById("ans2").style.display = "none"; 
+            document.getElementById("res").innerHTML = obj[level][3];
             
         }
     
