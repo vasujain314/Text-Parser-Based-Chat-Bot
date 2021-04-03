@@ -20,6 +20,8 @@ function input()
 
 var rootques = String(str[0]);
 // console.log(rootques);
+document.getElementById("main").style.display="block";
+
 document.getElementById("ques").innerHTML = rootques;
 
 // console.log(str[1]);
