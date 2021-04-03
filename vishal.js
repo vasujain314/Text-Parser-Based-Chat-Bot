@@ -29,14 +29,14 @@ for(var i=1;i<=n;i++)
     console.log(str[i]);
     let size = str[i].search(/\S/);
    
-    if(size==1)
-    {
-        size=2;
-    }
+    // if(size==1)
+    // {
+    //     size=4;
+    // }
     console.log(size);
     let len = str[i].length;
     
-    obj[size/2-1].push(str[i].substring(size, len));      
+    obj[size/4-1].push(str[i].substring(size, len));      
 }
 
 // for(var i=0;i<n/2;i++)
