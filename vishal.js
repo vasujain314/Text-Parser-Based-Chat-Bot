@@ -1,91 +1,133 @@
 var str = [];
-// str[0] = "is the weather cold?"
-// str[1] = "    if yes, wear a warm jacket"
-// str[2] = "    if no, is it raining?"
-// str[3] = "        if yes, is it windy?"
-// str[4] = "            if yes, wear a windbreaker"
-// str[5] = "            if no, take an umbrella"
-// str[6] = "        if no, then take a teeshirt" 
-
 var n;
 var obj;
-function input()
-{
-   str = $('#input').val().split("\n");
-   n = str.length -1; 
-    obj = new Array(n/2);
-   for (var i = 0; i < obj.length; i++) {
-      obj[i] = new Array(2);
+function input() {
+    str = $('#input').val().split("\n");
+    n = str.length;
+    obj = new Array(n);
+    for (var i = 0; i < obj.length; i++) {
+        obj[i] = new Array(4);
     }
 
-var rootques = String(str[0]);
-// console.log(rootques);
-document.getElementById("main").style.display="block";
+    // console.log(n);
 
-document.getElementById("ques").innerHTML = rootques;
-
-// console.log(str[1]);
-for(var i=1;i<=n;i++)
-{
-    
-    console.log(str[i]);
-    let size = str[i].search(/\S/);
-   
-    // if(size==1)
-    // {
-    //     size=4;
-    // }
-    console.log(size);
-    let len = str[i].length;
-    
-    obj[size/4-1].push(str[i].substring(size, len));      
-}
-
-// for(var i=0;i<n/2;i++)
-// {
-// console.log(obj[i][2]);
-// }
-}
-
-
-var level = 0;
-
-function vishalyes()
-    {
-        console.log(obj[level][2]);
-        
-        if(obj[level][2] [obj[level][2].length-1] == "?")
-        {
-            document.getElementById("ques").innerHTML = obj[level][2];
-            level++;
-
-        }   
-        else{
-            document.getElementById("ques").style.display = "none";
-            document.getElementById("ans1").style.display = "none"; 
-            document.getElementById("ans2").style.display = "none";
-            document.getElementById("res").innerHTML = obj[level][2];
+    let p = 3;
+    // console.log(str[1]);
+    for (var i = 0; i < n; i++) {
+        let size = str[i].search(/\S/);
+        if (size == 0) {
+            p++;
         }
-    
-    
-}
-function vishalNo()
-    {
+        // console.log(size);
+        let len = str[i].length;
+        let s = str[i].search(',');
+        str[i] = p.toString() + str[i].substring(s + 1, len)
+        obj[size / 4].push(str[i]);
+    }
 
-        if(obj[level][3][obj[level][3].length-1] == "?")
-        {
-            document.getElementById("ques").innerHTML = obj[level][3];
+    // for (i = 0; i < n; i++)
+    //     console.log(obj[i]);
+
+    var rootques = String(str[0].substring(1, str[0].length));
+
+    document.getElementById("main").style.display = "block";
+
+    document.getElementById("ques").innerHTML = rootques;
+}
+
+
+var level = 1;
+var para = 4;
+
+
+function next() {
+    level = 0;
+    if (obj[level][para] == undefined)
+        alert("End of Paragraph");
+    // console.log(obj[level][para]);
+    else {
+        document.getElementById("res").style.display = "none";
+        document.getElementById("ques").style.display = "block";
+        document.getElementById("ques").innerHTML = obj[level][para].substring(1, obj[level][para].length);
+        document.getElementById("ans1").style.display = "inline-block";
+        document.getElementById("ans2").style.display = "inline-block";
+        document.getElementById("ans3").style.display = "none";
+        level++;
+    }
+    // para++;
+    // console.log(para);
+}
+
+
+function vishalyes() {
+    // document.getElementById("ans3").style.display = "none";
+    // console.log(obj[level][para]);
+    // if (para != 4)
+    //     para++;
+    var j = -1;
+    // console.log(para);
+    for (let i = 4; i < obj[level].length; i++) {
+        if (obj[level][i][0] == para.toString()) {
+            j = i;
+            break;
+        }
+    }
+    // console.log(obj[level][j]);
+    if (j == -1) {
+        alert("End of Paragraph");
+    }
+    else {
+        if (obj[level][j][obj[level][j].length - 1] == "?") {
+            // console.log(obj[level][j]);
+            document.getElementById("ques").innerHTML = obj[level][j].substring(1, obj[level][j].length);
             level++;
-        }   
-        else{
+        }
+        else {
             document.getElementById("ques").style.display = "none";
             document.getElementById("ans1").style.display = "none";
-            document.getElementById("ans2").style.display = "none"; 
-            document.getElementById("res").innerHTML = obj[level][3];
-            
+            document.getElementById("ans2").style.display = "none";
+            document.getElementById("ans3").style.display = "block";
+            document.getElementById("res").style.display = "block";
+            // console.log(obj[level][j]);
+            document.getElementById("res").innerHTML = obj[level][j].substring(1, obj[level][j].length);
+            para++;
         }
-    
+    }
 }
+function vishalNo() {
+    // if (para != 4)
+    //     para--;
+    var j = -1, f = 0;
+    // para++;
+    for (let i = 4; i < obj[level].length; i++) {
+        if (obj[level][i][0] == para.toString() && f == 0) {
+            f = 1;
+        }
+        else if (obj[level][i][0] == para.toString() && f == 1) {
+            j = i;
+            break;
+        }
+    }
+    console.log(j);
+    console.log(obj[level][j]);
+    if (j == -1)
+        alert("End of Paragraph");
 
+    else {
+        if (obj[level][j][obj[level][j].length - 1] == "?") {
+            // console.log(obj[level][j]);
+            document.getElementById("ques").innerHTML = obj[level][j].substring(1, obj[level][j].length);
+            level++;
+        }
+        else {
+            document.getElementById("ques").style.display = "none";
+            document.getElementById("ans1").style.display = "none";
+            document.getElementById("ans2").style.display = "none";
+            document.getElementById("ans3").style.display = "block";
+            document.getElementById("res").style.display = "block";
+            document.getElementById("res").innerHTML = obj[level][j].substring(1, obj[level][j].length);
+            para++;
+        }
+    }
 
-
+}
