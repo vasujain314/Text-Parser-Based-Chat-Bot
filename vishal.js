@@ -9,8 +9,6 @@ function input() {
         obj[i] = new Array(4);
     }
 
-    // console.log(n);
-
     let p = 3;
     // console.log(str[1]);
     for (var i = 0; i < n; i++) {
@@ -25,14 +23,15 @@ function input() {
         obj[size / 4].push(str[i]);
     }
 
-    // for (i = 0; i < n; i++)
-    //     console.log(obj[i]);
-
     var rootques = String(str[0].substring(1, str[0].length));
-
     document.getElementById("main").style.display = "block";
-
     document.getElementById("ques").innerHTML = rootques;
+    
+    var ul = document.getElementById("log");
+    var candidate =  rootques;
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(candidate));
+    ul.appendChild(li);    
 }
 
 
@@ -44,8 +43,15 @@ function next() {
     level = 0;
     if (obj[level][para] == undefined)
         alert("End of Paragraph");
-    // console.log(obj[level][para]);
     else {
+        
+        var ul = document.getElementById("log");
+        var candidate =  obj[level][para].substring(1, obj[level][para].length);
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode(candidate));
+        ul.appendChild(li);
+
+
         document.getElementById("res").style.display = "none";
         document.getElementById("ques").style.display = "block";
         document.getElementById("ques").innerHTML = obj[level][para].substring(1, obj[level][para].length);
@@ -60,10 +66,13 @@ function next() {
 
 
 function vishalyes() {
-    // document.getElementById("ans3").style.display = "none";
-    // console.log(obj[level][para]);
-    // if (para != 4)
-    //     para++;
+
+    var ul = document.getElementById("log");
+    var candidate = "Yes";
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(candidate));
+    ul.appendChild(li); 
+
     var j = -1;
     // console.log(para);
     for (let i = 4; i < obj[level].length; i++) {
@@ -72,6 +81,7 @@ function vishalyes() {
             break;
         }
     }
+
     // console.log(obj[level][j]);
     if (j == -1) {
         alert("End of Paragraph");
@@ -80,6 +90,10 @@ function vishalyes() {
         if (obj[level][j][obj[level][j].length - 1] == "?") {
             // console.log(obj[level][j]);
             document.getElementById("ques").innerHTML = obj[level][j].substring(1, obj[level][j].length);
+            var candidate = obj[level][j].substring(1, obj[level][j].length);
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(candidate));
+            ul.appendChild(li);
             level++;
         }
         else {
@@ -88,15 +102,30 @@ function vishalyes() {
             document.getElementById("ans2").style.display = "none";
             document.getElementById("ans3").style.display = "block";
             document.getElementById("res").style.display = "block";
-            // console.log(obj[level][j]);
             document.getElementById("res").innerHTML = obj[level][j].substring(1, obj[level][j].length);
+            var candidate = obj[level][j].substring(1, obj[level][j].length);
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(candidate));
+            ul.appendChild(li);
             para++;
         }
+
     }
+
+
 }
 function vishalNo() {
-    // if (para != 4)
-    //     para--;
+
+    var ul = document.getElementById("log");
+
+    var candidate = "No";
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(candidate));
+    ul.appendChild(li); 
+
+            
+
+
     var j = -1, f = 0;
     // para++;
     for (let i = 4; i < obj[level].length; i++) {
@@ -117,6 +146,12 @@ function vishalNo() {
         if (obj[level][j][obj[level][j].length - 1] == "?") {
             // console.log(obj[level][j]);
             document.getElementById("ques").innerHTML = obj[level][j].substring(1, obj[level][j].length);
+           
+            var candidate = obj[level][j].substring(1, obj[level][j].length);
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(candidate.value));
+            ul.appendChild(li);   
+
             level++;
         }
         else {
@@ -126,8 +161,15 @@ function vishalNo() {
             document.getElementById("ans3").style.display = "block";
             document.getElementById("res").style.display = "block";
             document.getElementById("res").innerHTML = obj[level][j].substring(1, obj[level][j].length);
+           
+            var candidate = obj[level][j].substring(1, obj[level][j].length);
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(candidate.value));
+            ul.appendChild(li);
             para++;
         }
+            
+
     }
 
 }
